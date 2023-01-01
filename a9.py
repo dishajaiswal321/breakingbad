@@ -1,77 +1,76 @@
-# Input from user 
-x=int(input("Enter the numbers in row wise: "))
-y=int(input("Enter the numbers in coloumn wise: "))
-matrix1=[]
-print("Enetr the entries row wise: ")
-for i in range(x):
-    a=[]
-    for j in range(y):
-        a.append(int(input()))
-    matrix1.append(a)
-print("The first matrix is: ")
-for i in range(x):
-    for j in range(y):
-        print(matrix1[i][j],end=" ")
-    print()
-#r=int(input("Enter the numbers in row wise: "))
-#c=int(input("Enter the numbers in coloumn wise: "))
-print("Enter the entries row wise: ")
-matrix2=[]
-for i in range(x):
-    b=[]
-    for j in range(y):
-        b.append(int(input()))
-    matrix2.append(b)
-print("The second matrix is: ")
-for i in range(x):
-    for j in range(y):
-        print(matrix2[i][j],end=" ")
-    print()
-matrix3=[]
-for i in range(x):
-    c=[]
-    for j in range(y):
-        c.append(matrix1[i][j]+matrix2[i][j])
-    matrix3.append(c)
-print("The addition of two matrices is: ")
-for i in range(x):
-    for j in range(y):
-        print(matrix3[i][j],end =" ")
-    print()
+print("Matrix A")
+r=int(input("Number of rows : "))
+c=int(input("Number of columns : "))
+A=[[0 for j in range(c)]for i in range(r)]
+for i in range(r):
+    for j in range(c):
+        A[i][j]=int(input("Enter elements : "))
+print("\nMatrix A = ",A)
+print("\nMatrix B")
+p=int(input("Number of rows : "))
+q=int(input("Number of columns : "))
+B=[[0 for j in range(q)]for i in range(p)]
+for i in range(p):
+    for j in range(q):
+        B[i][j]=int(input("Enter elements : "))
+print("\nMatrix B = ",B)
+result=[[0 for j in range(c)]for i in range(r)]
 
-matrix4=[]
-for i in range(x):
-    d=[]
-    for j in range(y):
-        d.append(matrix1[i][j]-matrix2[i][j])
-    matrix4.append(d)
+def add():
+    for i in range(r):
+        for j in range(c):
+            result[i][j]=A[i][j]+B[i][j]
+    print("Addition of two matrices is : ",result)
 
-print("The substraction of two matrices is: ")
-for i in range(x):
-    for j in range(y):
-        print(matrix4[i][j],end =" ")
-    print()
-#multiplication of two matrix    
-print("Multiplication of two matrix is: ")
-c=[]
-for i in range(x):
-    h=[]
-    for j in range(y):
-        total=0 
-        for k in range(y):
-            total+=(matrix1[i][k]*matrix2[k][j])
-        h.append(total)
-    c.append(h)
-for i in range(x):
-    for j in range(y):
-        print(c[i][j],end=" ")
-    print()
-#Transpose of matrix
-print("Transpose of a first matrix is: ")
-for i in range(x):
-    for j in range(y):
-        matrix1[i][j],matrix1[j][i]=matrix1[j][i],matrix1[i][j]
-for i in range (x):
-    for j in range(y):
-        print(matrix1[i][j], end = " ")
-    print()
+def sub():
+    for i in range(r):
+        for j in range(c):
+            result[i][j]=A[i][j]-B[i][j]
+    print("Subtraction of two matrices is : ",result)
+
+def mul():
+    for i in range(r):
+        for j in range(c):
+            for k in range(r):
+                result[i][j]+=A[i][k]*B[k][j]
+    print("Multiplication of two matrices is : ",result)
+
+def transpose():
+    z=input("select matrix (A/B) : ")
+    for i in range(r):
+        for j in range(c):
+            if z==A:
+                result[j][i]=A[i][j]
+            else:
+                result[j][i]=B[i][j]
+    print("Transpose of matrix ",z," is : ",result)
+
+def menu():
+    print("\n_________MENU_________\n")
+    print("1.Addition of two matrices\n2.Subtraction of two matrices\n3.Multiplication of two matrices\n4.Transpose of a matrix\n5.Exit")
+menu()
+while True:
+    ch=int(input("Enter your choice : "))
+    if ch==1:
+        if r==p and c==q:
+            add()
+        else:
+            print("Invalid matrix operation")
+    elif ch==2:
+        if r==p and c==q:
+            sub()
+        else:
+            print("Invalid matrix operation")
+    elif ch==3:
+        mul()
+    elif ch==4:
+        if r==p and c==q:
+            transpose()
+        else:
+            print("Invalid matrix operation")
+    elif ch==5:
+        print("THANK YOU !!!")
+        False
+        break
+    else:
+        print("Enter valid choice :( ")  
